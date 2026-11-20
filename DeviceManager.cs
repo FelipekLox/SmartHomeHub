@@ -6,8 +6,10 @@ namespace SmartHomeHub
     public class DeviceManager
     {
         public List<SmartDevice> Devices { get; } = new List<SmartDevice>();
+        public List<SmartSensor> Sensors { get; } = new List<SmartSensor>();
 
         public void AddDevice(SmartDevice device) => Devices.Add(device);
+        public void AddSensor(SmartSensor sensor) => Sensors.Add(sensor);
 
         public void PrintAllStatuses()
         {
@@ -70,6 +72,15 @@ namespace SmartHomeHub
                 }
             }
             Console.WriteLine($"Итого за сутки: {totalDailyKwh:F2} кВт·ч");
+        }
+
+        public void PrintAllMeasurements()
+        {
+            Console.WriteLine("=== Показания датчиков ===");
+            foreach (var s in Sensors)
+            {
+                Console.WriteLine(s.GetStatus());
+            }
         }
     }
 }

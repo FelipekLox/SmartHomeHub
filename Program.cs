@@ -23,12 +23,18 @@ namespace SmartHomeHub
             manager.AddDevice(thermo);
             manager.AddDevice(fan);
 
+            // Добавляем сенсоры
+            manager.AddSensor(new TemperatureSensor("S1", "Термометр на улице", -3.5));
+            manager.AddSensor(new MotionSensor("S2", "Датчик движения в прихожей", true));
+
             manager.SetLevelForAllAdjustable(4);
             manager.PrintAllStatuses();
             Console.WriteLine();
             manager.PrintScheduledDevices();
             Console.WriteLine();
             manager.PrintTotalEnergy();
+            Console.WriteLine();
+            manager.PrintAllMeasurements();
 
             Console.ReadKey();
         }
