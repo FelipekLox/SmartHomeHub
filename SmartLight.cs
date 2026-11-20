@@ -2,9 +2,11 @@
 
 namespace SmartHomeHub
 {
-    public class SmartLight : SmartDevice, IAdjustable, IReportable
+    public class SmartLight : SmartDevice, IAdjustable, IReportable, ISchedulable
     {
         public int Level { get; private set; } // Яркость 0–100
+        public TimeSpan? ScheduledOn { get; private set; }
+        public TimeSpan? ScheduledOff { get; private set; }
 
         public SmartLight(string id, string name) : base(id, name) { }
 
@@ -14,6 +16,9 @@ namespace SmartHomeHub
                 throw new ArgumentOutOfRangeException(nameof(level), "Яркость должна быть от 0 до 100.");
             Level = level;
         }
+
+        public void ScheduleOn(TimeSpan time) => ScheduledOn = time;
+        public void ScheduleOff(TimeSpan time) => ScheduledOff = time;
 
         public override string GetStatus() => $"{base.GetStatus()}, Яркость: {Level}%";
         public string GetShortReport() => $"Лампа [{Name}]: яркость {Level}%";

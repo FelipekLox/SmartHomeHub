@@ -41,5 +41,19 @@ namespace SmartHomeHub
                     Console.WriteLine(reportable.GetShortReport());
             }
         }
+
+        public void PrintScheduledDevices()
+        {
+            Console.WriteLine("=== Устройства с активным расписанием ===");
+            foreach (var d in Devices)
+            {
+                if (d is ISchedulable schedulable && (schedulable.ScheduledOn.HasValue || schedulable.ScheduledOff.HasValue))
+                {
+                    string onStr = schedulable.ScheduledOn?.ToString(@"hh\:mm") ?? "не задано";
+                    string offStr = schedulable.ScheduledOff?.ToString(@"hh\:mm") ?? "не задано";
+                    Console.WriteLine($"- {d.Name} [{d.Id}]: Вкл в {onStr}, Выкл в {offStr}");
+                }
+            }
+        }
     }
 }
