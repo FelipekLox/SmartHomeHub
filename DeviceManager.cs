@@ -55,5 +55,21 @@ namespace SmartHomeHub
                 }
             }
         }
+
+        public void PrintTotalEnergy()
+        {
+            double totalDailyKwh = 0;
+            Console.WriteLine("=== Потребление электроэнергии ===");
+            foreach (var d in Devices)
+            {
+                if (d is IEnergyConsumer consumer)
+                {
+                    double daily = consumer.CalculateDailyConsumption();
+                    totalDailyKwh += daily;
+                    Console.WriteLine($"- {d.Name} ({consumer.PowerConsumptionWatt} Вт): {daily:F2} кВт·ч/сутки");
+                }
+            }
+            Console.WriteLine($"Итого за сутки: {totalDailyKwh:F2} кВт·ч");
+        }
     }
 }

@@ -20,4 +20,10 @@ namespace SmartHomeHub
         void ScheduleOn(TimeSpan time);
         void ScheduleOff(TimeSpan time);
     }
+
+    public interface IEnergyConsumer
+    {
+        double PowerConsumptionWatt { get; }
+        double CalculateDailyConsumption();
+    }
 }

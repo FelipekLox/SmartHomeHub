@@ -15,7 +15,6 @@ namespace SmartHomeHub
             thermo.TurnOn();
             fan.TurnOn();
 
-            // Настройка расписания
             light.ScheduleOn(new TimeSpan(18, 30, 0));
             light.ScheduleOff(new TimeSpan(23, 0, 0));
             thermo.ScheduleOn(new TimeSpan(7, 0, 0));
@@ -28,6 +27,8 @@ namespace SmartHomeHub
             manager.PrintAllStatuses();
             Console.WriteLine();
             manager.PrintScheduledDevices();
+            Console.WriteLine();
+            manager.PrintTotalEnergy();
 
             Console.ReadKey();
         }
